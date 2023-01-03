@@ -1,0 +1,34 @@
+/* Copyright (c) 2015, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&dsi_nt51021b_1200p_video_dpt {
+		/*modify DPT lcd timming and init code*/
+		qcom,mdss-dsi-on-command = [15 01 00 00 10 00 02 8F A5
+			15 01 00 00 20 00 02 01 00
+			15 01 00 00 10 00 02 8F A5
+			15 01 00 00 10 00 02 83 AA
+			15 01 00 00 10 00 02 84 11
+			15 01 00 00 10 00 02 A9 4B
+			15 01 00 00 10 00 02 83 00
+			15 01 00 00 10 00 02 84 00
+			15 01 00 00 10 00 02 8F 00
+			/*05 01 00 00 a0 00 02 11 00*/
+			/*05 01 00 00 f0 00 02 29 00*/];
+		/*[BUGFIX]-Mod-END by SCDTABLET.jinghuang@tcl.com*/
+		/*[BUGFIX]-Mod-END by SCDTABLET.jinghuang@tcl.com*/
+		/*[BUGFIX]-Mod-BEGIN by SCDTABLET.jinghuang@tcl.com,04/25/2016,1992762*/
+		/*delete cmd28 and cmd10 for the panel.*/
+		qcom,mdss-dsi-off-command = [];
+		/*[BUGFIX]-Mod-END by SCDTABLET.jinghuang@tcl.com*/
+		qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
+		qcom,mdss-dsi-off-command-state = "dsi_lp_mode";
+};

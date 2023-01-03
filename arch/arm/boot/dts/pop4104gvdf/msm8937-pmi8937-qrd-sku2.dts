@@ -1,0 +1,78 @@
+/*
+ * Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+
+#include "msm8937.dtsi"
+#include "msm8937-pmi8937-qrd-sku2.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. MSM8937-PMI8937 QRD SKU2";
+	compatible = "qcom,msm8937-pmi8937-qrd-sku2",
+		   "qcom,msm8937-qrd", "qcom,msm8937", "qcom,qrd";
+	qcom,board-id= <0x12000b 0>;
+};
+
+&int_codec {
+	qcom,model = "msm8952-sku2-snd-card";
+};
+
+&i2c_2 {
+	pericom-type-c@1d {
+		status="disabled";
+	};
+};
+
+&i2c_3 {
+	status = "ok";
+	goodix@14 {
+		compatible = "goodix,gt9xx";
+		reg = <0x14>;
+                interrupt-parent = <&tlmm>;
+                interrupts = <65 0>;
+                avdd-supply = <&pm8937_l10>;
+                vdd-supply = <&pm8937_l10>;
+		vcc-i2c-supply = <&pm8937_l5>;
+                interrupt-gpios = <&tlmm 65 0x00>;
+                reset-gpios = <&tlmm 64 0x00>;
+                pinctrl-names = "pmx_ts_active","pmx_ts_suspend",
+                        "pmx_ts_release";
+                pinctrl-0 = <&ts_int_active &ts_reset_active>;
+                pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
+                pinctrl-2 = <&ts_release>;
+		goodix,panel-coords =<0 0 800 1400>;
+		goodix,display-coords = <0 0 800 1280>;
+		goodix,button-map= <158 102 139>;
+		regulator-min-microvolt = <2800000>;
+		regulator-max-microvolt = <2800000>;
+		goodix,family-id = <0x0>;
+		goodix,i2c-pull-up;
+		goodix,product-id="9271";
+		goodix,cfg-data = [
+			4D D0 02 00 05 05 34 C1 01 0F 23 5F 50 32 03 05 00 00 00 00 00 00 00 14 14 1E 14 8A 0A 0A 51 00 D3
+			07 00 00 00 81 33 1D 3C 01 00 00 00 00 00 00 00 00 00 4E 78 90 D5 01 02 00 00 04 88 51 00 84 58 00
+			80 60 00 76 69 00 73 73 00 78 10 30 48 00 F0 40 30 AA AA 27 70 20 22 22 02 00 00 00 00 00 00 00 00
+			00 00 00 00 00 00 00 00 00 00 00 00 00 02 04 06 08 0A 0C 0E 14 12 10 FF FF FF FF 00 00 00 00 00 00
+			00 00 00 00 00 00 00 00 00 00 24 18 22 1C 21 1D 20 1E 1F 16 02 0F 04 10 06 12 08 13 0A 00 FF FF FF
+			FF FF FF 00 00 00 F4 FF FF FF FF FF FF FF FF 47 FF FF FF 2D 01
+			];
+		goodix,cfg-data_100um = [
+			4D D0 02 00 05 05 34 C1 01 0F 23 5F 50 32 03 05 00 00 00 00 00 00 00 14 14 1E 14 8A 0A 0A 51 00 D3
+			07 00 00 00 81 33 1D 3C 01 00 00 00 00 00 00 00 00 00 4E 78 90 D5 01 02 00 00 04 88 51 00 84 58 00
+			80 60 00 76 69 00 73 73 00 78 10 30 48 00 F0 40 30 AA AA 27 70 20 22 22 02 00 00 00 00 00 00 00 00
+			00 00 00 00 00 00 00 00 00 00 00 00 00 02 04 06 08 0A 0C 0E 14 12 10 FF FF FF FF 00 00 00 00 00 00
+			00 00 00 00 00 00 00 00 00 00 24 18 22 1C 21 1D 20 1E 1F 16 02 0F 04 10 06 12 08 13 0A 00 FF FF FF
+			FF FF FF 00 00 00 F4 FF FF FF FF FF FF FF FF 47 FF FF FF 2D 01
+			];
+	};
+};
